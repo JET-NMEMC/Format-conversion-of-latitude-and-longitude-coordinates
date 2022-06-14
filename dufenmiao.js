@@ -1,29 +1,35 @@
-formatDegree=function(value) {
+
+formatDegree = function (value) {
     ///<summary>将度转换成为度分秒</summary>
     value = Math.abs(value);
     var v1 = Math.floor(value);//度
     var v2 = Math.floor((value - v1) * 60);//分
     var v3 = ((value - v1) * 3600 % 60).toFixed(3);//秒
+    (geweibuling == true && v2 < 10) ? v2 = "0" + v2 : v2 = v2;
+    (geweibuling == true && v3 < 10) ? v3 = "0" + v3 : v3 = v3;
     return v1 + '°' + v2 + '\′' + v3 + '″';
 };
-du2dufenmiao=function(value,n) {
+du2dufenmiao = function (value, n) {
     ///<summary>将度转换成为度分秒</summary>
     value = Math.abs(value);
     var v1 = Math.floor(value);//度
     var v2 = Math.floor((value - v1) * 60);//分
     var v3 = ((value - v1) * 3600 % 60).toFixed(n);//秒
+    (geweibuling == true && v2 < 10) ? v2 = "0" + v2 : v2 = v2;
+    (geweibuling == true && v3 < 10) ? v3 = "0" + v3 : v3 = v3;
     return v1 + '°' + v2 + '\′' + v3 + '″';
 };
-du2dufen=function(value,n) {
-    ///<summary>将度转换成为度分秒</summary>
+du2dufen = function (value, n) {
+    ///<summary>将度转换成为度分</summary>
     value = Math.abs(value);
     var v1 = Math.floor(value);//度
-    var v2 = ((value-v1) * 60).toFixed(n);//分
+    var v2 = ((value - v1) * 60).toFixed(n);//分
+    (geweibuling == true && v2 < 10) ? v2 = "0" + v2 : v2 = v2;
     // var v3 = ((value - v1) * 3600 % 60).toFixed(3);//秒
     return v1 + '°' + v2 + '\′';
 };
 
-DegreeConvertBack=function(value) { ///<summary>度分秒转换成为度</summary>
+DegreeConvertBack = function (value) { ///<summary>度分秒转换成为度</summary>
     var du = value.split("°")[0];
     var fen = value.split("°")[1].split(/′|'/)[0];
     var miao = value.split("°")[1].split(/′|'/)[1].split(/″|"/)[0];
