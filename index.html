@@ -11,7 +11,7 @@
 
 <body style="background-color: rgb(231, 248, 237);">
     <h1>度分秒转换工具</h1>
-    <div><input type="checkbox" name="个位补零" id="buling">个位补零</div>
+    <div><input type="checkbox" name="个位补零" id="buling" checked="checked">个位补零</div>
     <div align="center"><button onClick="main()" style="width: 21%; text-align: center;font-size: 20px;">开始转换</button>
     </div>
     <br>
@@ -61,16 +61,18 @@
         var xiaoshu_miao = document.getElementById("input3").value;
 
         var Utext = inArea.value;
+
         Utext = Utext.trim();
-        Utext = Utext.replace(/'/g, "′");
-        var yyy = Utext.split(/[\n]/); //按行分割
+        Utext = Utext.replace(/'|’/g, "′");
+
+        var yyy = Utext.split(/[\n]/); //按行分割，得到点位
         var shuju = [] //行内分割，写入新数组
         for (var i = 0; i < yyy.length; i++) {
-            shuju[i] = yyy[i].split(/,|，|\s+/);
+            shuju[i] = yyy[i].split(/,|，|\s+/); //行内分割，得到单点的经度、纬度串
         }
-        console.log("初始分割数据", shuju);
+        // console.log("初始分割数据", shuju);
 
-        if (Utext.search(/′|'/) != -1) {
+        if (Utext.search(/′|'|’/) != -1) {
             console.log("度分或者度分秒格式");
             for (var i = 0; i < shuju.length; i++) {
                 shuju[i][0] = Number(DegreeConvertBack(shuju[i][0]));
@@ -95,7 +97,7 @@
             // console.log("转换度结果", shuju);
         }
 
-
+//--------------------------------------------------------------------------------------------<输出>
         var shuju0 = JSON.parse(JSON.stringify(shuju));
         for (var i = 0; i < shuju0.length; i++) {
             shuju0[i][0] = (shuju0[i][0]).toFixed(xiaoshu_du);
